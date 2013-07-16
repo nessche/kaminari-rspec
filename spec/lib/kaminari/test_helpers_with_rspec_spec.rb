@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'spec_helper_rspec'
 require 'kaminari_rspec'
 include KaminariRspec::TestHelpers
 
@@ -29,6 +30,14 @@ describe 'KaminariRspec::TestHelpers::'do
 
       it 'should return the framework name' do
         discover_mock_framework.should == :my_framework
+      end
+
+    end
+
+    context 'when the mock framework is rspec' do
+
+      it 'should return rspec' do
+        discover_mock_framework.should == :rspec
       end
 
     end

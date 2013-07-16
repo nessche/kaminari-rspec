@@ -1,9 +1,21 @@
 require 'spec_helper'
-require 'rr'
+require 'spec_helper_rr'
 require 'kaminari_rspec'
 include KaminariRspec::TestHelpers
 
 describe 'KaminariRspec::TestHelpers::' do
+
+  describe 'discover_mock_framework' do
+
+    context 'when the framework is rr' do
+
+      it 'should return rr' do
+        discover_mock_framework.should == :rr
+      end
+
+    end
+
+  end
 
   describe 'stub_pagination' do
 
