@@ -31,8 +31,8 @@ module KaminariRspec
       values = {}
       values[:total_count] = options[:total_count] || (resource.respond_to?(:length) ? resource.length : 1)
       values[:limit_value] = options[:per_page] || 25
-      values[:num_pages] = (values[:total_count] / values[:limit_value]) + ((values[:total_count] % values[:limit_value]) == 0 ? 0 : 1)
-      values[:current_page] = [(options[:current_page] || 1), values[:num_pages]].min
+      values[:total_pages] = options[:total_pages] || (values[:total_count] / values[:limit_value]) + ((values[:total_count] % values[:limit_value]) == 0 ? 0 : 1)
+      values[:current_page] = [(options[:current_page] || 1), values[:total_pages]].min
       return values
     end
 
