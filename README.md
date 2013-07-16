@@ -2,6 +2,9 @@ Kaminari Rspec Library
 =========================
 
 
+[![Gem Version](https://badge.fury.io/rb/kaminari-rspec.png)](http://badge.fury.io/rb/kaminari-rspec)
+[![Build Status](https://travis-ci.org/nessche/kaminari-rspec.png)](https://travis-ci.org/nessche/kaminari-rspec)
+
 
 `kaminari-rspec` is a ruby gem that aims at simplifying writing the specs for views where Kaminari is used for pagination
 
