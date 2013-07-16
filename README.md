@@ -1,5 +1,28 @@
+Kaminari Rspec Library
+=========================
 
-== Rendering views with RSpec's render_view
+
+
+`kaminari-rspec` is a ruby gem that aims at simplifying writing the specs for views where Kaminari is used for pagination
+
+Installing
+----------
+
+Simply install the gem to your system
+
+`gem install kaminari-rspec`
+
+or if you are using Bundler add it to your gemspec file and run `bundle install`.
+
+Gem Versioning
+--------------
+
+The gem version reflects the kaminari version that is supports. Please notice that this gem is maintained in my spare time
+so delays occur between the release of a new Kaminari version and the release of a new version of this gem. Feel free
+to fork this repo and update the version and the code as needed.
+
+Rendering views with RSpec's render_view
+----------------------------------------
 
 If you are rendering the views from your controller spec using render_views AND you are mocking
 the data returned from the db with something along the lines of
@@ -19,7 +42,8 @@ If specific pagination values are needed they can be defined using a hash
 will create the same pagination links as a total count of 50 elements are available, with 10
 elements per page and page 3 being the current_page.
 
-=== Detecting mocking framework
+Detecting mocking framework
+---------------------------
 
 If you are using RSpec >= 2.5.2 there is no need to explicitly pass the mocking framework you
 are using to the stub_pagination method, as it is automatically detected by the TestHelpers.
@@ -27,7 +51,8 @@ For earlier versions you are required to explicitly use the same string you woul
 +RSpec.configuration.mock_with+ , so the actual method call is
     stub_pagination(mocked_result, :mock => :rspec, :total_count => 50, :current_page => 3, :per_page => 10)
 
-=== Default values
+Default values
+--------------
 
 The TestHelpers will also try to guess values so that you don't need to explicitly pass them all.
 * :per_page will default to 25
