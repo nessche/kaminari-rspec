@@ -31,12 +31,14 @@ module KaminariRspec
       values = {}
       values[:total_count] = options[:total_count] || (resource.respond_to?(:length) ? resource.length : 1)
       values[:limit_value] = options[:per_page] || 25
-      values[:total_pages] = options[:total_pages] || (values[:total_count] / values[:limit_value]) + ((values[:total_count] % values[:limit_value]) == 0 ? 0 : 1)
+      values[:total_pages] = (values[:total_count] / values[:limit_value]) + ((values[:total_count] % values[:limit_value]) == 0 ? 0 : 1)
       values[:current_page] = [(options[:current_page] || 1), values[:total_pages]].min
       return values
     end
 
     def stub_pagination_with_rspec(resource, values)
+
+      puts('Stubbing pagination methods with RSpec mocks')
 
       values.each do |key, value |
         allow(resource).to receive(key).and_return(value)
@@ -48,6 +50,8 @@ module KaminariRspec
 
     def stub_pagination_with_rr(resource, values)
 
+      puts('Stubbing pagination methods with RR')
+
       values.each do |key, value|
         eval "stub(resource).#{key} { #{value} }"
       end
@@ -58,6 +62,8 @@ module KaminariRspec
 
     def stub_pagination_with_mocha(resource, values)
 
+      puts('Stubbing pagination methods with mocha')
+
       values.each do |key, value|
         resource.stubs(key).returns(value)
       end
@@ -67,6 +73,8 @@ module KaminariRspec
     end
 
     def stub_pagination_with_flexmock(resource, values)
+
+      puts('Stubbing pagination methods with flexmock')
 
       mock = flexmock(resource)
 

@@ -45,7 +45,9 @@ If specific pagination values are needed they can be defined using a hash
     `stub_pagination(mocked_result, :total_count => 50, :current_page => 3, :per_page => 10)`
 
 will create the same pagination links as a total count of 50 elements are available, with 10
-elements per page and page 3 being the current_page.
+elements per page and page 3 being the current_page. Notice that `current_page` is anyway always
+set such that it respects the values passed in `total_count` and `per_page`, i.e. if you pass a
+total count of 95 and a per page value of 10, current page will be capped to 10
 
 Detecting mocking framework
 ---------------------------
@@ -63,6 +65,6 @@ Default values
 The TestHelpers will also try to guess values so that you don't need to explicitly pass them all.
 * `:per_page` will default to 25
 * `:current_page` will default to 1
-* `:total_page` will default to 1 if the object passed as resource is not a collection, otherwise it will
+* `:total_count` will default to 1 if the object passed as resource is not a collection, otherwise it will
   invoke get the value from resource.length
 

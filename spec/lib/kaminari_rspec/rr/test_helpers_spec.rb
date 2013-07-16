@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'spec_helper_rr'
+require_relative 'spec_helper_rr'
 require 'kaminari_rspec'
 include KaminariRspec::TestHelpers
 
-describe 'KaminariRspec::TestHelpers::' do
+describe 'KaminariRspec::TestHelpers::', :rr => true do
 
   describe 'discover_mock_framework' do
 

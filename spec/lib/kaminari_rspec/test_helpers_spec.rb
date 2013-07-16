@@ -1,48 +1,9 @@
 require 'spec_helper'
-require 'spec_helper_rspec'
 require 'kaminari_rspec'
 include KaminariRspec::TestHelpers
 
-describe 'KaminariRspec::TestHelpers::'do
+describe 'KaminariRspec::TestHelpers' do
 
-  describe 'discover_mock_framework' do
-
-    context 'when the mock framework does not support framework_name' do
-
-      before do
-        dumb_framework = Object.new
-        allow(RSpec.configuration).to receive(:mock_framework) { dumb_framework }
-      end
-
-      it 'should return :nothing' do
-        discover_mock_framework.should == :nothing
-
-      end
-
-    end
-
-    context 'when the mock framework does support framework_name' do
-
-      before do
-        mock_framework = RSpec.configuration.mock_framework
-        allow(mock_framework).to receive(:framework_name) { :my_framework }
-      end
-
-      it 'should return the framework name' do
-        discover_mock_framework.should == :my_framework
-      end
-
-    end
-
-    context 'when the mock framework is rspec' do
-
-      it 'should return rspec' do
-        discover_mock_framework.should == :rspec
-      end
-
-    end
-
-  end
 
   describe 'calculate_values' do
 
@@ -106,9 +67,9 @@ describe 'KaminariRspec::TestHelpers::'do
 
     end
 
-    it 'sets num_pages based on total_count and per_page' do
+    it 'sets total_pages based on total_count and per_page' do
       values = calculate_values(Object.new, :total_count => 50, :per_page => 25)
-      values[:num_pages].should == 2
+      values[:total_pages].should == 2
     end
 
     context 'when current_page is not specified' do
@@ -135,9 +96,9 @@ describe 'KaminariRspec::TestHelpers::'do
 
       end
 
-      context 'and the current_page value is > num_pages' do
+      context 'and the current_page value is > total_pages' do
 
-        it 'sets current_page to the max value allowed by num_pages' do
+        it 'sets current_page to the max value allowed by total_pages' do
 
           values = calculate_values(Object.new, :current_page => 19, :total_count => 100, :per_page => 20)
           values[:current_page].should == 5
@@ -147,10 +108,8 @@ describe 'KaminariRspec::TestHelpers::'do
       end
 
     end
-
   end
 
 
 
 end
-
