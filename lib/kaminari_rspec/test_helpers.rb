@@ -3,7 +3,7 @@ module KaminariRspec
 
     def stub_pagination(resource, options={})
       return nil unless resource
-      mock_framework = options[:mock] || :rr
+      mock_framework = options[:mock] || discover_mock_framework
       values = calculate_values(resource, options)
       case mock_framework
         when :rspec then stub_pagination_with_rspec(resource, values)
@@ -39,7 +39,7 @@ module KaminariRspec
     def stub_pagination_with_rspec(resource, values)
 
       values.each do |key, value |
-        resource.stub(key).and_return(value)
+        allow(resource).to receive(key).and_return(value)
       end
 
       return resource
