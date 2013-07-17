@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/nessche/kaminari-rspec'
   s.summary     = 'A Rspec Helper library for the Kaminari gem'
   s.description = 'A Rspec Helper library for the Kaminari gem'
-
+  s.license     = 'MIT'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
