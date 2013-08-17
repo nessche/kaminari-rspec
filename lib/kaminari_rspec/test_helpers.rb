@@ -38,8 +38,6 @@ module KaminariRspec
 
     def stub_pagination_with_rspec(resource, values)
 
-      puts('Stubbing pagination methods with RSpec mocks')
-
       values.each do |key, value |
         allow(resource).to receive(key).and_return(value)
       end
@@ -49,8 +47,6 @@ module KaminariRspec
     end
 
     def stub_pagination_with_rr(resource, values)
-
-      puts('Stubbing pagination methods with RR')
 
       values.each do |key, value|
         eval "stub(resource).#{key} { #{value} }"
@@ -62,8 +58,6 @@ module KaminariRspec
 
     def stub_pagination_with_mocha(resource, values)
 
-      puts('Stubbing pagination methods with mocha')
-
       values.each do |key, value|
         resource.stubs(key).returns(value)
       end
@@ -73,8 +67,6 @@ module KaminariRspec
     end
 
     def stub_pagination_with_flexmock(resource, values)
-
-      puts('Stubbing pagination methods with flexmock')
 
       mock = flexmock(resource)
 
