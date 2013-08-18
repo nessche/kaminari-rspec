@@ -76,3 +76,6 @@ Currently supported mocking frameworks are:
 * RR (Double Ruby)
 * Mocha
 * Flexmock
+
+If you are using this gem, please drop me a note telling which one of the above mentioned frameworks you are using. If you
+are using a framework which is not supported, feel free to fork and add the support for it.
