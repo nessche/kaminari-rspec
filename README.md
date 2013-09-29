@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/nessche/kaminari-rspec.png)](https://travis-ci.org/nessche/kaminari-rspec)
 
 
-`kaminari-rspec` is a ruby gem that aims at simplifying writing the specs for views where Kaminari is used for pagination
+`kaminari-rspec` is a ruby gem that aims at simplifying writing the specs for views where [Kaminari](https://github.com/amatsuda/kaminari) is used for pagination
 
 ## Installing
 
