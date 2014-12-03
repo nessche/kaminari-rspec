@@ -1,3 +1,4 @@
+require 'minitest/autorun'
 require 'flexmock'
 
 RSpec.configure do |config|
