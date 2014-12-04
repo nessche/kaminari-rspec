@@ -26,9 +26,9 @@ to fork this repo and update the version and the code as needed.
 ## Rendering views with RSpec's render_view
 
 If you are rendering the views from your controller spec using render_views AND you are mocking
-the data returned from the db with something along the lines of
+the data returned from the db with something along the lines of (RSpec syntax)
 
-    Model.stub_chain(:order, :page, :per).and_return([model_mock])
+    allow(Model).to receive_message_chain(:order, :page, :per).and_return(model_mock)
 
 you may want to also stub the methods needed by the pagination partials, in order to do that, just
 add the following to your `spec_helper`
@@ -37,17 +37,23 @@ add the following to your `spec_helper`
 
 and then modify your controller spec to look like
 
-    Model.stub_chain(:order, :page, :per).and_return(stub_pagination([model_mock]))
+    allow(Model).to receive_message_chain(:order, :page, :per).and_return(stub_pagination(model_mock))
 
-the stubs will return the values needed to set the pagination as being on the first and only page.
+the stubs will return the values needed to set the pagination as being on the desired page, with the desired
+total page count (see options below how to set these parameters).
 
 ### Pagination options
 
-If specific pagination values are needed they can be defined using a hash. The following values are supported:
+If specific pagination values are needed they can be defined using a hash passed as the second parameter to method
+
+    stub_pagination(resource, options = {})
+
+The following values are supported:
 
 * `:total_count` : the total number of elements to be paginated. It defaults to `resource.length` if resource is a collection,
 otherwise to 1
-* `:per_page` : the amount of elements per page, defaults to 25
+* `:per_page` : the amount of elements per page, defaults to 25. If `resource` does not contain enough elements to fill
+on page, no padding will occur. If `resource` contains more elements, only the first ones needed to fill the page will be shown
 * `:current_page` : the current page of the pagination. Defaults to 1. Notice that `current_page` is anyway always
   set such that it respects the values passed in `total_count` and `per_page`, i.e. if you pass a
   total count of 95 and a per page value of 10, current page will be capped to 10
@@ -57,7 +63,8 @@ As an example
     stub_pagination(resource, :total_count => 50, :current_page => 3, :per_page => 10)
 
 will create the pagination links for a total count of 50 elements, with 10
-elements per page and page 3 being the current_page.
+elements per page and page 3 being the current_page. If `resource` contains more than 10
+elements, only the first 10 will be shown.
 
 ## Detecting mocking framework
 

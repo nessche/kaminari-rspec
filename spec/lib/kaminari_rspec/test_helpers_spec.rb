@@ -13,7 +13,7 @@ describe 'KaminariRspec::TestHelpers' do
 
         it 'sets total_count to 1' do
 
-          values = calculate_values(Object.new)
+          values = calculate_values(Object.new, current_page: 1, per_page: 25)
           values[:total_count].should == 1
 
         end
@@ -24,7 +24,7 @@ describe 'KaminariRspec::TestHelpers' do
 
         it 'sets total_count to the length of the object' do
 
-          values = calculate_values([ Object.new, Object.new])
+          values = calculate_values([ Object.new, Object.new], current_page: 1, per_page: 25)
           values[:total_count].should == 2
 
         end
@@ -38,49 +38,16 @@ describe 'KaminariRspec::TestHelpers' do
 
       it 'sets the total_count to the specified value' do
 
-        values = calculate_values(Object.new, :total_count => 13)
+        values = calculate_values(Object.new, current_page: 1, total_count: 13, per_page: 25)
         values[:total_count].should == 13
 
       end
 
     end
 
-    context 'when per_page is not specified' do
-
-      it 'set per_page to the default of 25' do
-
-        values = calculate_values(Object.new)
-        values[:limit_value].should == 25
-
-      end
-
-    end
-
-    context 'when per_page is specified' do
-
-      it 'sets limit_value to the specified value' do
-
-        values = calculate_values(Object.new, :per_page => 17)
-        values[:limit_value].should == 17
-
-      end
-
-    end
-
     it 'sets total_pages based on total_count and per_page' do
-      values = calculate_values(Object.new, :total_count => 50, :per_page => 25)
+      values = calculate_values(Object.new, current_page: 1, :total_count => 50, :per_page => 25)
       values[:total_pages].should == 2
-    end
-
-    context 'when current_page is not specified' do
-
-      it 'set current_page to the default of 1' do
-
-        values = calculate_values(Object.new)
-        values[:current_page].should == 1
-
-      end
-
     end
 
     context 'when current_page is specified' do
@@ -108,6 +75,7 @@ describe 'KaminariRspec::TestHelpers' do
       end
 
     end
+
   end
 
 

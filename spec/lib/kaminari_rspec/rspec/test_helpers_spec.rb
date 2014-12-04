@@ -40,6 +40,14 @@ describe 'KaminariRspec::TestHelpers::'  do
         discover_mock_framework.should == :rspec
       end
 
+      it 'should correctly mock the pagination' do
+        resource = [Object.new, Object.new]
+        stubbed_resource = stub_pagination(resource, total_count: 45, current_page: 3, per_page: 10)
+        expect(stubbed_resource.total_count).to eq(45)
+        expect(stubbed_resource.current_page).to eq(3)
+
+      end
+
     end
 
   end
